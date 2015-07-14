@@ -22,14 +22,14 @@ function fold (hash, text) {
   return hash < 0 ? hash * -2 : hash;
 }
 
-function foldObject (hash, o) {
+function foldObject (hash, o, seen) {
   return Object.keys(o).reduce(foldKey, hash);
   function foldKey (hash, key) {
-    return foldValue(hash, o[key], key);
+    return foldValue(hash, o[key], key, seen);
   }
 }
 
-function foldValue (input, value, key) {
+function foldValue (input, value, key, seen) {
   var hash = fold(fold(fold(input, key), toString(value)), typeof value);
   if (value === null) {
     return fold(hash, 'null');
@@ -38,7 +38,11 @@ function foldValue (input, value, key) {
     return fold(hash, 'undefined');
   }
   if (typeof value === 'object') {
-    return foldObject(hash, value);
+    if (seen.indexOf(value) !== -1) {
+      return fold(hash, '[Circular]' + key);
+    }
+    seen.push(value);
+    return foldObject(hash, value, seen);
   }
   return fold(hash, value.toString());
 }
@@ -48,7 +52,7 @@ function toString (o) {
 }
 
 function sum (o) {
-  return pad(foldValue(0, o, '').toString(16), 8);
+  return pad(foldValue(0, o, '', []).toString(16), 8);
 }
 
 module.exports = sum;

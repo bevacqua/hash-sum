@@ -40,19 +40,13 @@ test('creates unique hashes', function (t) {
   sub({b:{},a:{}});
   sub([]);
   sub(new Date());
+  sub(global, 'global');
   t.equal(results.length, _.uniq(results).length);
   t.end();
 
-  function sub (value) {
+  function sub (value, name) {
     var hash = sum(value);
     results.push(hash);
-    console.log('%s from:', hash, value);
+    console.log('%s from:', hash, name || value);
   }
-});
-
-test('blows up circularly', function (t) {
-  t.throws(function thrower () {
-    sum(global);
-  });
-  t.end()
 });
