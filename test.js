@@ -5,7 +5,7 @@ var test = require('tape');
 var results = [];
 
 test('creates unique hashes', function (t) {
-  var createHash = require('./');
+  var sum = require('./');
   sub([0,1,2,3]);
   sub({url:12});
   sub({headers:12});
@@ -39,12 +39,20 @@ test('creates unique hashes', function (t) {
   sub({a:{},b:{}});
   sub({b:{},a:{}});
   sub([]);
+  sub(new Date());
   t.equal(results.length, _.uniq(results).length);
   t.end();
 
   function sub (value) {
-    var hash = createHash(value);
+    var hash = sum(value);
     results.push(hash);
     console.log('%s from:', hash, value);
   }
+});
+
+test('blows up circularly', function (t) {
+  t.throws(function thrower () {
+    sum(global);
+  });
+  t.end()
 });

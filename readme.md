@@ -51,6 +51,10 @@ caec4ca8 from: { b: {}, a: {} }
 ok 1 should be equal
 ```
 
+# caveat
+
+circular references are unsupported and will result in a `RangeError` exception.
+
 # license
 
 MIT
