@@ -1,3 +1,7 @@
+# 1.0.2 Quick Sort
+
+- Sorts object keys so that property order doesn't affect outcome
+
 # 1.0.1 Perfect Circle
 
 - Guard against circular references

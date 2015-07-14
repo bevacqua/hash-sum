@@ -2,10 +2,10 @@
 
 var _ = require('lodash');
 var test = require('tape');
-var results = [];
+var sum = require('./');
 
 test('creates unique hashes', function (t) {
-  var sum = require('./');
+  var results = [];
   sub([0,1,2,3]);
   sub({url:12});
   sub({headers:12});
@@ -37,7 +37,6 @@ test('creates unique hashes', function (t) {
   sub(void 0);
   sub({});
   sub({a:{},b:{}});
-  sub({b:{},a:{}});
   sub([]);
   sub(new Date());
   sub(global, 'global');
@@ -48,5 +47,15 @@ test('creates unique hashes', function (t) {
     var hash = sum(value);
     results.push(hash);
     console.log('%s from:', hash, name || value);
+  }
+});
+
+test('hashes clash if same properties', function (t) {
+  equals({a:'1'},{a:'1'});
+  equals({a:'1',b:1},{b:1,a:'1'});
+  t.end();
+
+  function equals (a, b) {
+    t.equal(sum(a), sum(b));
   }
 });

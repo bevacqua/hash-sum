@@ -23,7 +23,7 @@ function fold (hash, text) {
 }
 
 function foldObject (hash, o, seen) {
-  return Object.keys(o).reduce(foldKey, hash);
+  return Object.keys(o).sort().reduce(foldKey, hash);
   function foldKey (hash, key) {
     return foldValue(hash, o[key], key, seen);
   }
