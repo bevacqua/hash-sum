@@ -8,6 +8,16 @@
 npm i hash-sum -S
 ```
 
+# features
+
+- no dependencies
+- minimal footprint
+- works in all of node.js, io.js, and the browser
+- hashes functions based on their source code
+- produces different hashes for different object types
+- support for circular references in objects
+- ignores property assignment order
+
 # `sum(value)`
 
 yields a four-byte hexadecimal hash based off of `value`.
