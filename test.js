@@ -7,6 +7,8 @@ var sum = require('./');
 test('creates unique hashes', function (t) {
   var results = [];
   sub([0,1,2,3]);
+  sub({0:0,1:1,2:2,3:3});
+  sub({0:0,1:1,2:2,3:3,length:4});
   sub({url:12});
   sub({headers:12});
   sub({headers:122});
@@ -51,6 +53,8 @@ test('creates unique hashes', function (t) {
 });
 
 test('hashes clash if same properties', function (t) {
+  equals(function () {}, function () {});
+  equals(function (a) {}, function (a) {});
   equals({a:'1'},{a:'1'});
   equals({a:'1',b:1},{b:1,a:'1'});
   t.end();
