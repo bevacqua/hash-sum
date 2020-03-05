@@ -51,11 +51,11 @@ test('creates unique hashes', function (t) {
   test_case(new Date(1988, 5, 9));
   test_case(global, 'global');
 
-  const uniqCases = _.uniqBy(cases, 'hash')
+  const uniqCases = _.uniqBy(cases, 'hash');
   _.uniqBy(cases, 'hash').forEach(function (expected) {
-    var matches = _.filter(cases, { hash: expected.hash })
-    t.equal(matches.length, 1, expected.hash + ': ' + _.map(matches, 'value').join(' '))
-  })
+    var matches = _.filter(cases, { hash: expected.hash });
+    t.equal(matches.length, 1, expected.hash + ': ' + _.map(matches, 'value').join(' '));
+  });
 
   t.end();
 
@@ -71,7 +71,7 @@ test('hashes clash if same properties', function (t) {
   equals(function (a) {}, function (a) {});
   equals({a:'1'},{a:'1'});
   equals({a:'1',b:1},{b:1,a:'1'});
-  equals({valueOf(){return 1}},{valueOf(){return 1}});
+  equals({valueOf(){return 1;}},{valueOf(){return 1;}});
   t.end();
 
   function equals (a, b) {
