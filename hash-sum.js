@@ -43,16 +43,16 @@ function foldValue (input, value, key, seen) {
     }
     seen.push(value);
 
-    var objHash = foldObject(hash, value, seen)
+    var objHash = foldObject(hash, value, seen);
 
     if (!('valueOf' in value) || typeof value.valueOf !== 'function') {
       return objHash;
     }
 
     try {
-      return fold(objHash, String(value.valueOf()))
+      return fold(objHash, String(value.valueOf()));
     } catch (err) {
-      return fold(objHash, '[valueOf exception]' + (err.stack || err.message))
+      return fold(objHash, '[valueOf exception]' + (err.stack || err.message));
     }
   }
   return fold(hash, value.toString());
