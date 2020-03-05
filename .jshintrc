@@ -1,5 +1,5 @@
 {
-  "esversion": 6,
+  "esnext": true,
   "curly": true,
   "eqeqeq": true,
   "newcap": true,

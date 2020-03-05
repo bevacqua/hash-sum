@@ -61,7 +61,7 @@ test('creates unique hashes', function (t) {
 
   function test_case(value, name) {
     var hash = sum(value);
-    cases.push({ value, hash });
+    cases.push({ value: value, hash: hash });
     console.log('%s from:', hash, name || value);
   }
 });
