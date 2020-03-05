@@ -43,8 +43,8 @@ test('creates unique hashes', function (t) {
   test_case(void 0);
   test_case({});
   test_case({a:{},b:{}});
-  test_case({valueOf(){return 1}});
-  test_case({valueOf(){return 2}});
+  test_case({valueOf(){return 1;}});
+  test_case({valueOf(){return 2;}});
   test_case([]);
   test_case(new Date());
   test_case(new Date(2019, 5, 28));
