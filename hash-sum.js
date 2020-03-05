@@ -1,5 +1,18 @@
 'use strict';
 
+(function (root, factory) {
+  if ((typeof define === 'function') && define.amd) {
+    // AMD
+    define([], factory);
+  } else if ((typeof module !== 'undefined') && module.exports) {
+    // CommonJS
+    module.exports = factory();
+  } else {
+    // Browser global
+    root.sum = factory();
+  }
+}(this, function () {
+
 function pad (hash, len) {
   while (hash.length < len) {
     hash = '0' + hash;
@@ -66,4 +79,6 @@ function sum (o) {
   return pad(foldValue(0, o, '', []).toString(16), 8);
 }
 
-module.exports = sum;
+return sum;
+
+}));
