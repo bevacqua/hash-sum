@@ -18,5 +18,6 @@
   "latedef": "nofunc",
   "quotmark": "single",
   "indent": 2,
+  "predef" : ["define"],
   "node": true
 }
