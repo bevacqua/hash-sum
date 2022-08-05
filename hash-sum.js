@@ -51,8 +51,12 @@ function foldValue (input, value, key, seen) {
 
     try {
       return fold(objHash, String(value.valueOf()))
-    } catch (err) {
-      return fold(objHash, '[valueOf exception]' + (err.stack || err.message))
+    } catch (_) {
+      try {
+        return fold(objHash, '[valueOf or toString exception]' + JSON.stringify(value.valueOf()))
+      } catch (err) {
+        return fold(objHash, '[valueOf or JSON.stringify exception]' + (err.stack || err.message))
+      }
     }
   }
   return fold(hash, value.toString());

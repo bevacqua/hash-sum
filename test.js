@@ -70,6 +70,7 @@ test('hashes clash if same properties', function (t) {
   equals(function () {}, function () {});
   equals(function (a) {}, function (a) {});
   equals({a:'1'},{a:'1'});
+  equals({toString:'1'},{toString:'1'});
   equals({a:'1',b:1},{b:1,a:'1'});
   equals({valueOf(){return 1}},{valueOf(){return 1}});
   t.end();
